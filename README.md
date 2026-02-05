@@ -1,13 +1,3 @@
-# ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
-
-## Template Instructions
-
-Welcome,
-
-This is the Code Institute student template for the bring your own data project option in Predictive Analytics. We have preinstalled all of the tools you need to get started. It's perfectly okay to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
-
-You can safely delete the Template Instructions section of this README.md file and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
-
 ## How to use this repo
 
 1. Use this template to create your GitHub project repo
@@ -41,11 +31,24 @@ You can now use the `heroku` CLI program - try running `heroku apps` to confirm 
 
 
 ## Dataset Content
-* Describe your dataset. Choose a dataset of reasonable size to avoid exceeding the repository's maximum size and to have a shorter model training time. If you are doing an image recognition project, we suggest you consider using an image shape that is 100px × 100px or 50px × 50px, to ensure the model meets the performance requirement but is smaller than 100Mb for a smoother push to GitHub. A reasonably sized image set is ~5000 images, but you can choose ~10000 lines for numeric or textual data. 
+* Describe your dataset. Choose a dataset of reasonable size to avoid exceeding the repository's maximum size and to have a shorter model training time.
+
+The dataset is sourced from [Kaggle](https://www.kaggle.com/datasets/shalmamuji/electricity-cost-prediction-dataset). We created then a fictious user story where predicitve analytics can be applied in a real project in the workplace.
 
 
 ## Business Requirements
-* Describe your business requirements
+The client is a fictional facilities and cost manager working for a construction and property management company, responsible for operational energy expenditure. Electricity costs represent a significant and increasingly volatile operational expense. 
+
+The client currently lacks insight into which factors most strongly influence electricity costs and has no reliable way to estimate future costs for different property site profiles. Without data-driven insights, the client risks inefficient budgeting, unexpected cost overruns, and suboptimal decision-making when managing or planning sites.
+
+The project will be considered successful if:
+- Key factors influencing electricity costs are identified through data analysis and clearly communicated using data visualisations.
+- A machine learning model is capable of generating reasonable electricity cost predictions based on site characteristics.
+- The results are presented in a clear, accessible dashboard suitable for non-technical stakeholders.
+
+* Business requirement 1: The client requires an understanding of how different site characteristics and operational factors influence electricity costs.
+
+* Business requirement 2: The client requires a predictive model capable of estimating electricity costs for a given site profile in order to support budgeting and planning decisions.
 
 
 ## Hypothesis and how to validate?
