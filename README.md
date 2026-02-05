@@ -33,7 +33,7 @@ You can now use the `heroku` CLI program - try running `heroku apps` to confirm 
 ## Dataset Content
 * Describe your dataset. Choose a dataset of reasonable size to avoid exceeding the repository's maximum size and to have a shorter model training time.
 
-The dataset is sourced from [Kaggle](https://www.kaggle.com/datasets/shalmamuji/electricity-cost-prediction-dataset). We created then a fictious user story where predicitve analytics can be applied in a real project in the workplace.
+This project uses a publicly available dataset sourced from [Kaggle](https://www.kaggle.com/datasets/shalmamuji/electricity-cost-prediction-dataset) that contains site-level and operational factors related to electricity consumption and cost. The dataset is anonymised and suitable for public use.
 
 
 ## Business Requirements
@@ -46,9 +46,9 @@ The project will be considered successful if:
 - A machine learning model is capable of generating reasonable electricity cost predictions based on site characteristics.
 - The results are presented in a clear, accessible dashboard suitable for non-technical stakeholders.
 
-* Business requirement 1: The client requires an understanding of how different site characteristics and operational factors influence electricity costs.
+**Business requirement 1:** The client requires an understanding of how different site characteristics and operational factors influence electricity costs.
 
-* Business requirement 2: The client requires a predictive model capable of estimating electricity costs for a given site profile in order to support budgeting and planning decisions.
+**Business requirement 2:** The client requires a predictive model capable of estimating electricity costs for a given site profile in order to support budgeting and planning decisions.
 
 
 ## Hypothesis and how to validate?
@@ -61,6 +61,34 @@ The project will be considered successful if:
 
 ## ML Business Case
 * In the previous bullet, you potentially visualized an ML task to answer a business requirement. You should frame the business case using the method we covered in the course 
+
+
+## Epics and User Stories
+The project was divided into five epics, based on data visualisation and machine learning tasks.
+
+### Epic - Information Gathering and Data Collection
+- **User Story** - As a data analyst, I can import the electricity cost dataset from Kaggle so that I can work with a local copy of the data. 
+- **User Story** - As a data analyst, I can load and inspect the dataset so that I can understand its structure and contents.
+
+### Epic - Data Visualisation, Cleaning, and Preparation
+- **User Story** - As a data analyst, I can explore and visualise the dataset so that I can identify factors influencing electricity costs (*Business Requirement 1*).
+- **User Story** - As a data analyst, I can clean the dataset and handle missing or inconsistent values to prepare it for modelling.
+- **User Story** - As a data scientist, I can perform feature engineering to improve the dataset for machine learning.
+
+### Epic - Model Training, Optimisation, and Validation
+- **User Story** - As a data scientist, I can split the data into training and test sets to prepare it for modelling.
+- **User Story** - As a data scientist, I can train a regression model to predict electricity costs based on site characteristics (*Business Requirement 2*).
+- **User Story** - As a data scientist, I can evaluate and optimise the model to ensure it produces reliable predictions.
+
+### Epic - Dashboard Planning, Designing, and Development
+- **User Story** - As a non-technical user, I can view a project summary explaining the dataset and business requirements.
+- **User Story** - As a non-technical user, I can explore visualisations that explain which factors influence electricity costs (*Business Requirement 1*).
+- **User Story** - As a non-technical user, I can input site characteristics and receive an estimated electricity cost (*Business Requirement 2*).
+- **User Story** - As a technical user, I can view model performance metrics and validation results.
+
+### Epic - Dashboard Deployment and Release
+- **User Story** - As a user, I can access the dashboard via a publicly deployed web application.
+- **User Story** - As a technical user, I can follow the README instructions to reproduce or redeploy the project.
 
 
 ## Dashboard Design
