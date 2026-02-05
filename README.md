@@ -119,7 +119,33 @@ The project was divided into five epics, based on data visualisation and machine
 * List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other item that your dashboard library supports.
 * Later, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but subsequently you used another plot type).
 
+### Page 1: Project Summary
+- A brief project introduction
+- Dataset summary (source, size, target variable)
+- State business requirements
+- Key project terminology
 
+### Page 2: Project Hypotheses
+- List of project hypotheses
+- Describe how each hypothesis was validated using data analysis or machine learning
+- Summarise conclusions once analysis is complete
+
+### Page 3: Electricity Cost Driver Analysis
+- Display preview of the dataset (shape and first rows)
+- Present correlation analysis between features and electricity cost
+- Show visualisations of key variables against electricity cost
+- Summarise insights on which site and operational factors most influence electricity cost
+
+### Page 4: Electricity Cost Prediction
+- Provide input widgets for site and operational characteristics
+- Allow users to generate electricity cost predictions for unseen site profiles
+- Display the predicted electricity cost output in a clear and interpretable format
+
+### Page 5: Model Performance and Technical Details
+- Overview of the machine learning pipeline
+- Features used to train the model
+- Model performance metrics (e.g. R², RMSE)
+- Feature importance
 
 ## Unfixed Bugs
 * You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
