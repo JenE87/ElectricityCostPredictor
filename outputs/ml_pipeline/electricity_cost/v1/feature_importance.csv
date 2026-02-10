@@ -1,0 +1,15 @@
+Feature,Importance
+site_area,0.7706
+structure_type_Mixed-use,0.0756
+resident_count,0.0475
+utilisation_rate,0.0408
+structure_type_Industrial,0.0294
+resident_group_low,0.0074
+issue_resolution_time,0.0056
+air_quality_index,0.0052
+recycling_rate,0.0051
+water_consumption,0.0047
+water_consumption_log,0.0047
+resident_group_medium,0.0026
+structure_type_Residential,0.0004
+resident_group_none,0.0003
