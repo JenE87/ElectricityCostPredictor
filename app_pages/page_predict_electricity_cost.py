@@ -1,9 +1,12 @@
 import streamlit as st
 import pandas as pd
+import math
 
 from src.data_management import load_pkl_file, load_electricity_data
 from src.machine_learning.predict_electricity_cost import prepare_features, predict_cost
 
+def round_up(n, base):
+    return int(base * math.ceil(n / base))
 
 def page_predict_electricity_cost_body():
 
@@ -27,6 +30,8 @@ def page_predict_electricity_cost_body():
     
     st.write("### Site profile inputs")
 
+    st.caption("Input ranges are based on training data and rounded for usability.")
+
     col1, col2 = st.columns(2)
 
     with col1:
@@ -38,11 +43,15 @@ def page_predict_electricity_cost_body():
             step=1,
         )
 
+        resident_min = int(df["resident_count"].min())
+        resident_max = round_up(df["resident_count"].max(), base=50)
+        resident_default = int(df["resident_count"].median())
+
         resident_count = st.number_input(
             "Resident / occupant count",
-            min_value=int(df["resident_count"].min()) if "resident_count" in df.columns else 0,
-            max_value=int(df["resident_count"].max()) if "resident_count" in df.columns else 10000,
-            value=int(df["resident_count"].median()) if "resident_count" in df.columns else 40,
+            min_value=resident_min,
+            max_value=resident_max,
+            value=resident_default,
             step=1,
         )
 
@@ -61,11 +70,15 @@ def page_predict_electricity_cost_body():
         )
 
     with col2:
+        water_min = int(df["water_consumption"].min())
+        water_max = round_up(df["water_consumption"].max(), base=500)
+        water_default = int(df["water_consumption"].median())
+
         water_consumption = st.number_input(
             "Water consumption (litres/day)",
-            min_value=int(df["water_consumption"].min()) if "water_consumption" in df.columns else 0,
-            max_value=int(df["water_consumption"].max()) if "water_consumption" in df.columns else 20000,
-            value=int(df["water_consumption"].median()) if "water_consumption" in df.columns else 3000,
+            min_value=water_min,
+            max_value=water_max,
+            value=water_default,
             step=50,
         )
 
