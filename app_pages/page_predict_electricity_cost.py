@@ -8,6 +8,55 @@ from src.machine_learning.predict_electricity_cost import prepare_features, pred
 def round_up(n, base):
     return int(base * math.ceil(n / base))
 
+
+def interpret_prediction(prediction: float, dataset: pd.DataFrame):
+    """
+    Provide a general interpretation of the predicted electricity cost
+    based on quartiles and key cost drivers identified in analysis.
+    """
+
+    q1 = dataset["electricity_cost"].quantile(0.25)
+    q2 = dataset["electricity_cost"].quantile(0.5)
+    q3 = dataset["electricity_cost"].quantile(0.75)
+
+    if prediction <= q1:
+        message = (
+            "The predicted electricity cost falls **within the lowest 25%** " \
+            "of sites in the dataset."
+        )
+    
+    elif prediction <= q2:
+        message = (
+            "The predicted electricity cost is **below the median level** " \
+            "observed in the dataset."
+        )
+    
+    elif prediction <= q3:
+        message = (
+            "The predicted electricity cost is **above the median level** " \
+            "observed in the dataset."
+        )
+    
+    else:
+        message = (
+            "The predicted electricity cost falls **within the highest 25%** " \
+            "of sites in the dataset."
+        )
+    
+    st.info(
+        f"### Interpretation\n\n"
+        f"{message}\n\n"
+        f"Based on the exploratory data analysis and Random Forest model, "
+        f"the strongest drivers of electricity cost were:\n"
+        f"- **Site area**\n"
+        f"- **Water consumption**\n"
+        f"- **Utilisation rate**\n"
+        f"- **Resident / occupant count**\n\n"
+        f"Changes in these factors are likely to have the greatest "
+        f"impact on predicted electricity expenditure."
+    )
+
+
 def page_predict_electricity_cost_body():
 
     st.write("### 🔌 Electricity Cost Prediction")
@@ -123,6 +172,8 @@ def page_predict_electricity_cost_body():
         pred = predict_cost(model=model, X_live=X_live)
 
         st.success(f"💡 **Estimated Monthly Electricity Cost:** US$ {pred:,.2f}")
+
+        interpret_prediction(prediction=pred, dataset=df)
 
         st.caption(
             "This prediction is an estimate based on patterns in the historical dataset.\n"
