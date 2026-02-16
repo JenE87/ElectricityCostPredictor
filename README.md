@@ -1,21 +1,3 @@
-## How to use this repo
-
-1. Use this template to create your GitHub project repo
-
-1. In your newly created repo click on the green Code button. 
-
-1. Then, from the Codespaces tab, click Create codespace on main.
-
-1. Wait for the workspace to open. This can take a few minutes.
-
-1. Open a new terminal and `pip3 install -r requirements.txt`
-
-1. Open the jupyter_notebooks directory, and click on the notebook you want to open.
-
-1. Click the kernel button and choose Python Environments.
-
-Note that the kernel says Python 3.12.1 as it inherits from the workspace, so it will be Python-3.12.1 as installed by Codespaces. To confirm this, you can use `! python --version` in a notebook code cell.
-
 ## Cloud IDE Reminders
 
 To log into the Heroku toolbelt CLI:
@@ -29,6 +11,7 @@ To log into the Heroku toolbelt CLI:
 
 You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
 
+# Electricity Cost Predictor
 
 ## Dataset Content
 This project uses a publicly available dataset sourced from [Kaggle](https://www.kaggle.com/datasets/shalmamuji/electricity-cost-prediction-dataset) that contains site and operational factors related to electricity cost. Each row represents a site and each column contains a site attribute.
@@ -63,7 +46,7 @@ The project will be considered successful if:
 **Business requirement 2:** The client requires a predictive model capable of estimating electricity cost for a given site profile in order to support budgeting and planning decisions.
 
 
-## Hypothesis and how to validate?
+## Hypotheses and how to validate?
 * List here your project hypothesis(es) and how you envision validating it (them)
 
 - **Hypothesis 1 - Site characteristics influence electricity cost**
@@ -75,9 +58,7 @@ The project will be considered successful if:
 - **Hypothesis 3 - A regression model can predict electricity cost with acceptable accuracy**
    - Hypothesis: A supervised machine learning regression model trained on site and operational features can predict electricity cost with reasonable accuracy.
    - Validation: This hypothesis will be validated by training a regression model and evaluating its performance using appropriate metrics such as R² and RMSE on a held-out test set.
-- **Hypothesis 4 - Feature engineering improves model performance**
-   - Hypothesis: Applying feature engineering and hyperparameter optimisation improves the predictive performance of the electricity cost model.
-   - Validation: Model performance before and after feature engineering and hyperparameter tuning will be compared to assess improvements in prediction accuracy.
+
 
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
 * List your business requirements and a rationale to map them to the Data Visualizations and ML tasks
@@ -178,7 +159,7 @@ The project was divided into five epics, based on data visualisation and machine
 
 - The text for the Home page was taken from Wikipedia Article A
 - Instructions on how to implement form validation on the Sign-Up page were taken from [Specific YouTube Tutorial](https://www.youtube.com/)
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
+- The icons in the dashboard were taken from [Streamlit emojis shortcodes]([https://fontawesome.com/](https://streamlit-emoji-shortcodes-streamlit-app-gwckff.streamlit.app/))
 
 ### Media
 
