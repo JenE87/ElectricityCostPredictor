@@ -13,6 +13,10 @@ def interpret_prediction(prediction: float, dataset: pd.DataFrame):
     """
     Provide a general interpretation of the predicted electricity cost
     based on quartiles and key cost drivers identified in analysis.
+
+    Returns:
+        band (str): cost category label
+        message (str): short interpretation message
     """
 
     q1 = dataset["electricity_cost"].quantile(0.25)
@@ -20,41 +24,34 @@ def interpret_prediction(prediction: float, dataset: pd.DataFrame):
     q3 = dataset["electricity_cost"].quantile(0.75)
 
     if prediction <= q1:
+        band = "Lower Cost Range"
         message = (
             "The predicted electricity cost falls **within the lowest 25%** " \
             "of sites in the dataset."
         )
     
     elif prediction <= q2:
+        band = "Below Median Cost"
         message = (
             "The predicted electricity cost is **below the median level** " \
             "observed in the dataset."
         )
     
     elif prediction <= q3:
+        band = "Above Median Cost"
         message = (
             "The predicted electricity cost is **above the median level** " \
             "observed in the dataset."
         )
     
     else:
+        band = "Higher Cost Range"
         message = (
             "The predicted electricity cost falls **within the highest 25%** " \
             "of sites in the dataset."
         )
     
-    st.info(
-        f"### Interpretation\n\n"
-        f"{message}\n\n"
-        f"Based on the exploratory data analysis and Random Forest model, "
-        f"the strongest drivers of electricity cost were:\n"
-        f"- **Site area**\n"
-        f"- **Water consumption**\n"
-        f"- **Utilisation rate**\n"
-        f"- **Resident / occupant count**\n\n"
-        f"Changes in these factors are likely to have the greatest "
-        f"impact on predicted electricity expenditure."
-    )
+    return band, message
 
 
 def page_predict_electricity_cost_body():
@@ -171,11 +168,30 @@ def page_predict_electricity_cost_body():
 
         pred = predict_cost(model=model, X_live=X_live)
 
-        st.success(f"💡 **Estimated Monthly Electricity Cost:** US$ {pred:,.2f}")
+        st.write("### Results")
 
-        interpret_prediction(prediction=pred, dataset=df)
+        band, message = interpret_prediction(prediction=pred, dataset=df)
+
+        colA, colB = st.columns(2)
+        with colA:
+            st.metric("Estimated monthly electricity cost (USD)", f"${pred:,.2f}")
+        with colB:
+            st.metric("Cost category", band)
+
+        st.info(
+            f"### Interpretation\n\n"
+            f"{message}\n\n"
+            f"Based on the exploratory data analysis and Random Forest model, "
+            f"the strongest drivers of electricity cost were:\n"
+            f"- **Site area**\n"
+            f"- **Water consumption**\n"
+            f"- **Utilisation rate**\n"
+            f"- **Resident / occupant count**\n\n"
+            f"Changes in these factors are likely to have the greatest "
+            f"impact on predicted electricity expenditure."
+        )
 
         st.caption(
-            "This prediction is an estimate based on patterns in the historical dataset.\n"
+            "This prediction is an estimate based on patterns in the historical dataset. "
             "Actual costs may vary due to factors not included in the data."
         )
