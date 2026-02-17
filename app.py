@@ -13,7 +13,7 @@ app = MultiPage(app_name= "Electricity Cost Predictor") # Create an instance of 
 # Add your app pages here using .add_page()
 app.add_page("Quick Project Summary", page_summary_body)
 app.add_page("Project Hypotheses & Validation", page_project_hypothesis_body)
-app.add_page("EDA and Visualizations", page_cost_drivers_body)
+app.add_page("Electricity Cost Driver Analysis", page_cost_drivers_body)
 app.add_page("Electricity Cost Prediction", page_predict_electricity_cost_body)
 # app.add_page("Model Performance", page_model_performance_body)
 
