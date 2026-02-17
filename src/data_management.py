@@ -4,8 +4,53 @@ import streamlit as st
 
 
 @st.cache_data
+def load_electricity_data_raw():
+    """
+    Load the raw dataset for non-technical preview purposes,
+    and standardise column names (including fixing known typos).
+    """
+    file_path = "inputs/datasets/raw/electricity_cost_dataset.csv"
+
+    try:
+        df = pd.read_csv(file_path)
+        if df.empty:
+            st.error("Raw dataset is empty.")
+            st.stop()
+
+        df.columns = (
+            df.columns.str.strip()
+            .str.lower()
+            .str.replace(" ", "_")
+        )
+            
+        rename_map = {
+            "site_area": "site_area",
+            "structure_type": "structure_type",
+            "water_consumption": "water_consumption",
+            "recycling_rate": "recycling_rate",
+            "utilisation_rate": "utilisation_rate",
+            "air_qality_index": "air_quality_index",            # typo in raw dataset
+            "issue reolution time": "issue_resolution_time",    # typo in raw dataset
+            "resident_count": "resident_count",
+            "electricity_cost": "electricity_cost",
+        }
+
+        df = df.rename(columns={k: v for k, v in rename_map.items() if k in df.columns})
+
+        return df
+    
+    except FileNotFoundError:
+        st.error(f"Raw dataset file not found at `{file_path}`.")
+        st.stop()
+    
+    except Exception as e:
+        st.error(f"Unexpected error while loading raw dataset:\n\n{e}")
+        st.stop()
+
 def load_electricity_data():
-    """Load the cleaned dataset with standardised names and with basic error handling."""
+    """
+    Load the cleaned dataset with standardised names and with basic error handling.
+    """
     file_path = "outputs/datasets/cleaned/ElectricityCostCleaned.csv"
 
     try:
