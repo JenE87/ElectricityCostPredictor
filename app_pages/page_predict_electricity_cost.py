@@ -107,14 +107,12 @@ def page_predict_electricity_cost_body():
             index=0,
         )
 
-        issue_resolution_time = st.number_input(
-            "Issue resolution time (hours)",
-            min_value=int(df["issue_resolution_time"].min()) if "issue_resolution_time" in df.columns else 1,
-            max_value = int(df["issue_resolution_time"].max()) if "issue_resolution_time" in df.columns else 72,
-            value=int(df["issue_resolution_time"].median()) if "issue_resolution_time" in df.columns else 24,
-            step=1,
+        utilisation_rate = st.slider(
+            "Utilisation rate (%)",
+            min_value=0,
+            max_value=100,
+            value=int(df["utilisation_rate"].median()) if "utilisation_rate" in df.columns else 70,
         )
-
     with col2:
         water_min = int(df["water_consumption"].min())
         water_max = round_up(df["water_consumption"].max(), base=500)
@@ -128,18 +126,12 @@ def page_predict_electricity_cost_body():
             step=50,
         )
 
-        recycling_rate = st.slider(
-            "Recycling rate (%)",
-            min_value=0,
-            max_value=100,
-            value=int(df["recycling_rate"].median()) if "recycling_rate" in df.columns else 50,
-        )
-
-        utilisation_rate = st.slider(
-            "Utilisation rate (%)",
-            min_value=0,
-            max_value=100,
-            value=int(df["utilisation_rate"].median()) if "utilisation_rate" in df.columns else 70,
+        issue_resolution_time = st.number_input(
+            "Issue resolution time (hours)",
+            min_value=int(df["issue_resolution_time"].min()) if "issue_resolution_time" in df.columns else 1,
+            max_value = int(df["issue_resolution_time"].max()) if "issue_resolution_time" in df.columns else 72,
+            value=int(df["issue_resolution_time"].median()) if "issue_resolution_time" in df.columns else 24,
+            step=1,
         )
 
         air_quality_index = st.number_input(
@@ -148,6 +140,13 @@ def page_predict_electricity_cost_body():
             max_value=int(df["air_quality_index"].max()) if "air_quality_index" in df.columns else 500,
             value=int(df["air_quality_index"].median()) if "air_quality_index" in df.columns else 100,
             step=5,
+        )
+
+        recycling_rate = st.slider(
+            "Recycling rate (%)",
+            min_value=0,
+            max_value=100,
+            value=int(df["recycling_rate"].median()) if "recycling_rate" in df.columns else 50,
         )
 
     st.write("")
