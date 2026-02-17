@@ -2,7 +2,7 @@ import streamlit as st
 from app_pages.multipage import MultiPage
 
 # load pages scripts
-# from app_pages.page_summary import page_summary_body
+from app_pages.page_summary import page_summary_body
 # from app_pages.page_project_hypothesis import page_hypothesis_body
 # from app_pages.page_cost_drivers import page_cost_drivers_body
 from app_pages.page_predict_electricity_cost import page_predict_electricity_cost_body
@@ -11,7 +11,7 @@ from app_pages.page_predict_electricity_cost import page_predict_electricity_cos
 app = MultiPage(app_name= "Electricity Cost Predictor") # Create an instance of the app 
 
 # Add your app pages here using .add_page()
-# app.add_page("Quick Project Summary", page_summary_body)
+app.add_page("Quick Project Summary", page_summary_body)
 # app.add_page("Project Hypothesis and Validation", page_project_hypothesis_body)
 # app.add_page("EDA and Visualizations", page_cost_drivers_body)
 app.add_page("Electricity Cost Prediction", page_predict_electricity_cost_body)

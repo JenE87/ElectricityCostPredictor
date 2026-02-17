@@ -5,7 +5,7 @@ import streamlit as st
 
 @st.cache_data
 def load_electricity_data():
-    """Load the cleaned dataset with stnadardised names and with basic error handling."""
+    """Load the cleaned dataset with standardised names and with basic error handling."""
     file_path = "outputs/datasets/cleaned/ElectricityCostCleaned.csv"
 
     try:
