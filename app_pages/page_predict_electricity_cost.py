@@ -174,17 +174,11 @@ def page_predict_electricity_cost_body():
 
         colA, colB = st.columns(2)
         with colA:
-            st.metric(
-                label="Estimated monthly electricity cost (USD)",
-                value=f"${pred:,.2f}",
-                border=True
-            )
+            with st.container():
+                st.metric(label="Estimated monthly electricity cost (USD)", value=f"${pred:,.2f}")
         with colB:
-            st.metric(
-                label="Cost category",
-                value=band,
-                border=True
-            )
+            with st.container():
+                st.metric(label="Cost category", value=band)
 
         st.info(
             f"### Interpretation\n\n"
