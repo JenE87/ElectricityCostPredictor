@@ -7,12 +7,17 @@ from src.data_management import load_electricity_data, load_electricity_data_raw
 
 def page_cost_drivers_body():
     """
-    Render the EDA & Cost Drivers page, readable for non-technical users with optional deeper detail.
+    Render the EDA & Cost Drivers page, readable for non-technical users with 
+    optional deeper detail.
     """
     st.write("### Electricity Cost Drivers Analysis")
 
     st.info(
-        "**Business Requirement 1:** Understand which site and operational factors influence electricity cost.\n\n"
+        "**Business Requirement 1:** Understand which site and operational "
+        "factors influence electricity cost."
+    )
+
+    st.write(
         "This page summarises the main cost drivers identified during analysis."
     )
 
@@ -23,15 +28,17 @@ def page_cost_drivers_body():
     st.write("### Key Takeaways")
 
     st.success(
-        "* Electricity cost generally increases with **site scale and operational intensity**.\n"
-        "* The strongest drivers observed were typically **site area**, **water consumption**, "
-        "**utilisation rate**, and **resident/occupant count**.\n"
-        "* Some factors have weaker direct relationships, but still improve estimates when combined." 
+        "* Electricity cost generally increases with **site scale** and "
+        "**operational intensity**.\n"
+        "* The strongest drivers observed were typically **site area**, **water "
+        "consumption**, **utilisation rate**, and **resident/occupant count**.\n"
+        "* Some factors have weaker direct relationships, but still improve "
+        "estimates when combined." 
     )
 
     st.write("---")
 
-    with st.expander("Explore the analysis (optional)", expanded=False):
+    with st.expander("Explore the analysis", expanded=False):
         # Preview of dataset (no engineered/encoded columns)
         if st.checkbox("Inspect dataset preview"):
             base_cols = [
@@ -55,7 +62,6 @@ def page_cost_drivers_body():
             st.dataframe(df_raw[available_cols].head(10))
         
 
-        # Correlation between numeric features and electricity cost
         if st.checkbox("Show correlation study (numeric features)"):
             st.caption(
                 "Correlation values indicate how strongly variables are related "
@@ -83,7 +89,6 @@ def page_cost_drivers_body():
             st.pyplot(fig)
 
 
-        # Structure type distribution
         if st.checkbox("Show structure type distribution"):
             st.caption(
                 "This shows how many sites of each structure type are in the dataset."
@@ -100,7 +105,6 @@ def page_cost_drivers_body():
             st.pyplot(fig)
 
 
-        # Electricity cost for sites with zero vs non-zero residents
         if st.checkbox("Show electricity cost for sites with vs without residents"):
             st.caption(
                 "This compares electricity cost between sites that have residents and those that "
@@ -133,20 +137,12 @@ def page_cost_drivers_body():
                 "This view shows which inputs the trained model relied on most when producing estimates."
             )
 
-            # Feature Importance Table
-            try:
-                fi = pd.read_csv(f"{model_path}/feature_importance.csv")
-                st.write("#### Feature importance table (top 15)")
-                st.dataframe(fi.head(15))
-            except Exception:
-                st.warning("Could not load `feature_importance.csv`.")
+            feat_imp = pd.read_csv(f"{model_path}/feature_importance.csv")
+            st.write("#### Feature importance table (top 10)")
+            st.dataframe(feat_imp.head(10))
 
-            # Feature Importance Plot image
-            try:
-                st.image(f"{model_path}/feature_importance.png",
-                        caption="Feature importance (Random Forest)")
-            except Exception:
-                st.warning("Could not load `feature_importance.png`.")
+            st.image(f"{model_path}/feature_importance.png",
+                    caption="Feature importance (Random Forest)")
 
 
         # Interactive relationship plot
