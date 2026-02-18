@@ -160,14 +160,37 @@ The project was divided into five epics, based on data visualisation and machine
 
 ## Testing
 ### Manual Testing
+| Feature / Page      | Action            | Expected Result      | Pass/Fail |
+|---------------------|-------------------|----------------------|-----------|
+| Dashboard - Heroku Deployment | Open live URL | App loads successfully in browser | Pass |
+| Dashboard - Sidebar Navigation | Click each page in the sidebar | Correct page loads, no errors | Pass |
+| Dashboard - Project Summary | Open Page | Text displays, link to README works, dataset metrics + key inputs show correctly | Pass |
+| Dashboard - Project Hypotheses  | Open page and expand | Hypotheses text displays, checkbox reveals method summary | Pass |
+| Dashboard - Electricity Cost Driver Analysis  | Open page, expander and toggle sections | Text displays, plots render and table preview shows expected columns | Pass |
+| Dashboard - Electricity Cost Prediction | Open page, enter valid values and run prediction | Prediction appears and updates (incl. estimated cost, cost category, interpretation) based on inputs | Pass |
+| Dashboard - Model Performance | Open page and expand "Technical Details" | Text displays, metrics display and optional plots/feature importance render | Pass |
+| Data - Raw dataset loads | Start app / open Electricity Cost Driver Analysis page  | Raw csv loads and preview displays | Pass |
+| Data - Cleaned dataset loads | Open pages using cleaned data  | Cleaned csv loads without erros or missing columns | Pass |
+| Data - Model artefacts exist | Open Model Performance page | Model and X/y splits load successfully | Pass |
+| Data - Feature importance file | Open Model Performance page and toggle "Show feature importance" | Table and png display | Pass |
 
 ### Validation Testing
 using PEP8 guidelines & CI Python Linter
 
 ### Fixed Bugs
+- **Missing `structure_type` column in dataset preview** (Electricity Cost Driver Analysis page)
+   Fix: Used the raw dataset for the preview and standardised headers (snake_case + typo corrections) to ensure `structure_type` is available for display.
+- **Raw dataset column typos and spacing caused empty/missing preview columns**
+   Fix: Standardised column names and corrected known typos (e.g., `air qality index` → `air_quality_index`, `issue reolution time` → `issue_resolution_time`) in the raw dataset loading function.
+- **Streamlit version did not support `border=True` in `st.metric()`**
+   Fix: Replaced `border=True` with `st.container()` layout to keep clean visual structure.
+- **Heroku build log warning about `runtime.txt` deprecation**
+   Fix: Removed `runtime.txt` to align with current Heroku recommendations and avoid future deployment issues.
+- **Long pages with too much scrolling**
+   Fix: Use expanders with the setting `expanded=False` on the Model Performance and Electricity Cost Driver Analysis pages instead of expanded sections and separators, to improve UX and prevent excessive scrolling.
 
 ### Unfixed Bugs
-* You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
+No known unfixed bugs at the time of submission.
 
 
 ## Deployment
@@ -185,17 +208,22 @@ using PEP8 guidelines & CI Python Linter
 
 
 ## Main Data Analysis and Machine Learning Libraries
-* Here you should list the libraries you used in the project and provide an example(s) of how you used these libraries.
-
-- Python
-- NumPy
-- Pandas
-- Matplotlib
-- scikit-learn
-- Seaborn
-- Streamlit
-- joblib
-- Ydata-profiling
+- **Pandas**
+   Used for loading csv files, inspecting data, and preparing train/test splits (e.g., `pd.read_csv()`, `.value_counts()`, selecting columns).
+- **Numpy**
+   Used for numeric operations and transformations during preprocessing (e.g., `np.log1p()` for skew reduction).
+- **Matplotlib**
+   Used for visualisations in the Streamlit dashboard (e.g., correlation bar chart, scatter plot for actual vs predicted, residual histogram).
+- **Seaborn**
+   Used for higher-level statistical plots during EDA (e.g., boxplots comparing distributions).
+- **scikit-learn**
+   Used for training and evaluating regression models (Linear Regression baseline and Random Forest Regressor), plus regression metrics such as R², RMSE, MAE.
+- **joblib**
+   Used to save and reload trained model artefacts and reusable objects (e.g., `random_forest_model.pkl`, `model_features.pkl`)
+- **Streamlit**
+   Used to build and deploy the interactive dashboard application. It enables rapid development of data-driven web apps and was used to structure multi-page navigation, display visalisations, render model outputs, and collect user input for electricity cost prediction.
+- **Ydata-profiling**
+   Used during EDA to generate an automated profiling report that supported feature understanding and preprocessing decisions.
 
 ## Credits 
 ### Code
