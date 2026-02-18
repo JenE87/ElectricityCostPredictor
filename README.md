@@ -1,5 +1,19 @@
 # Electricity Cost Predictor
 
+## Table of Contents 
+- [Dataset Content](#dataset-content)
+- [Project Terms & Jargon](#project-terms-and-jargon)
+- [Business Requirements](#business-requirements)
+- [Hypotheses](#hypothesis-and-how-to-validate?)
+- [Mapping Business Requirements to Data Visualization and ML Tasks](#the-rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
+- [ML Business Case](#ml-business-case)
+- [Epics and User Stories](#epics-and-user-stories)
+- [Dashboard Design](#dashboard-design)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Credits](#credits)
+- [Acknowledgements](#acknowledgements)
+
 ## Dataset Content
 This project uses a publicly available dataset sourced from [Kaggle](https://www.kaggle.com/datasets/shalmamuji/electricity-cost-prediction-dataset) that contains site and operational factors related to electricity cost. Each row represents a site and each column contains a site attribute.
 
@@ -17,6 +31,12 @@ The dataset is anonymised and suitable for public use. It consists of 10,000 row
 | Issue Resolution Time | Time taken to resolve operational or maintenance issues at the site in hours | 1 - 72                                   |
 | Resident Count        | Number of residents or occupants at the site                           | 0 - 441                                        |
 | Electricity Cost      | Monthly electricity cost in USD                                        | 500 - 5852                                     |
+
+## Project Terms & Jargon
+- **Electricity cost**: monthly electricity spend (USD)
+- **Site profile**: a combination of site attributes used to estimate cost
+- **Cost drivers**: variables that tend to increase/decrease costs
+- **Prediction**: model estimate based on historical patterns (not guaranteed)
 
 ## Business Requirements
 The client is a fictional facilities and cost manager working for a construction and property management company, responsible for operational energy expenditure. Electricity cost represent a significant and increasingly volatile operational expense. 
@@ -118,10 +138,13 @@ The project was divided into five epics, based on data visualisation and machine
 ## Unfixed Bugs
 * You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
 
+## Testing
+PEP8 validator
+
 ## Deployment
 ### Heroku
 
-* The App live link is: https://YOUR_APP_NAME.herokuapp.com/ 
+* The App live link is: [Electricity Cost Predictor](https://electricity-cost-predictor-5d88feda62f8.herokuapp.com/)
 * Set the runtime.txt Python version to a [Heroku-24](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
 * The project was deployed to Heroku using the following steps.
 
