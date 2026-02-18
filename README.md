@@ -4,7 +4,7 @@
 - [Dataset Content](#dataset-content)
 - [Project Terms & Jargon](#project-terms-and-jargon)
 - [Business Requirements](#business-requirements)
-- [Hypotheses](#hypothesis-and-how-to-validate?)
+- [Hypotheses](#hypothesis-and-how-to-validate-them)
 - [Mapping Business Requirements to Data Visualization and ML Tasks](#the-rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
 - [ML Business Case](#ml-business-case)
 - [Epics and User Stories](#epics-and-user-stories)
@@ -32,11 +32,13 @@ The dataset is anonymised and suitable for public use. It consists of 10,000 row
 | Resident Count        | Number of residents or occupants at the site                           | 0 - 441                                        |
 | Electricity Cost      | Monthly electricity cost in USD                                        | 500 - 5852                                     |
 
+
 ## Project Terms & Jargon
 - **Electricity cost**: monthly electricity spend (USD)
 - **Site profile**: a combination of site attributes used to estimate cost
 - **Cost drivers**: variables that tend to increase/decrease costs
 - **Prediction**: model estimate based on historical patterns (not guaranteed)
+
 
 ## Business Requirements
 The client is a fictional facilities and cost manager working for a construction and property management company, responsible for operational energy expenditure. Electricity cost represent a significant and increasingly volatile operational expense. 
@@ -53,7 +55,7 @@ The project will be considered successful if:
 **Business requirement 2:** The client requires a predictive model capable of estimating electricity cost for a given site profile in order to support budgeting and planning decisions.
 
 
-## Hypotheses and how to validate?
+## Hypotheses and how to validate them
 - **Hypothesis 1 - Site characteristics influence electricity cost**
    - Hypothesis: Electricity cost vary significantly depending on site characteristics such as site area, structure type, utilisation rate, and resident count.
    - Validation: This hypothesis will be validated through exploratory data analysis (EDA) and visualisations (e.g. correlation analysis) to identify which variables show strong relationships with electricity cost.
@@ -66,11 +68,36 @@ The project will be considered successful if:
 
 
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
-* List your business requirements and a rationale to map them to the Data Visualizations and ML tasks
+- **Business Requirement 1 (Data Visualization and Correlation Analysis)**
+   - We use **EDA** and **visualizations** to show how each feature relates to electricity cost.
+   - Techniques include: dataset inspection, distribution plots, and correlation analysis (numeric features).
+   - Outcome: clear summary of strongest drivers (e.g., site area, utilisation/occupancy patterns).
+- **Business Requirement 2 (Regression & Data Analysis)**
+   - We train a **supervised regression model** using the cleaned dataset.
+   - We evaluate the model using train/test split performance (R², RMSE, MAE).
+   - Outcome: a Streamlit predictor that estimates monthly electricity cost for a user-defined site profile.
 
 
 ## ML Business Case
-* In the previous bullet, you potentially visualized an ML task to answer a business requirement. You should frame the business case using the method we covered in the course 
+### Predict Electricity Cost
+**Regression Model**
+- We want a machine learning model to predict **monthly electricity cost (USD)** for a site based on its physical and operational characteristics. The target variable, `electricity_cost`, is **continuous numeric data**, so we consider a **regression model**. This is a **supervised learning** task with a single numeric output.
+- The ideal outcome is to provide the client (facilities/cost manager) with a consistent and repeatable estimate of monthly electricity cost for different site profiles, to support budgeting and planning decisions.
+- The model success metrics are:
+   - Strong generalisation performance on unseen data, assessed on a held-out test set using:
+      - R² score (explained variance)
+      - RMSE (typical size of prediction error in USD)
+      - MAE (average absolute error in USD)
+- The model is considered a failure if:
+   - Performance on the test set is poor enough that predictions are not useful for planning (e.g., low R² and/or large error metrics), or
+   - There is a large gap between train vs test results, indicating strong overfitting and unreliable generalisation.
+- The model output is defined as a single predicted electricity cost value (USD/month) for a user-provided site profile. Predictions are generated on demand in the Streamlit dashboard (not in batches).
+   - Predictions are most reliable when input values fall within the ranges observed in the training dataset.
+- Heuristics: Currently, the client has no data-driven approach for estimating electricity cost across varying site profiles and relies on manual judgement and rough comparisons.
+- The training data to the model comes from Kaggle.
+   - The dataset contains 10,000 observations and 9 attributes (including the target).
+   - Target: `electricity_cost`
+   - Features: `site_area`, `structure_type`, `water_consumption`, `recycling_rate`, `utilisation_rate`, `air_quality_index`, `issue_resolution_time`, `resident_count`
 
 
 ## Epics and User Stories
@@ -142,6 +169,7 @@ using PEP8 guidelines & CI Python Linter
 ### Unfixed Bugs
 * You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
 
+
 ## Deployment
 ### Heroku
 
@@ -171,7 +199,7 @@ using PEP8 guidelines & CI Python Linter
 
 ## Credits 
 ### Code
-- Code Institute LMS course materials
+- Code Institute LMS course materials, walkthroughs, custom classes and functions with focus on the predictive analytics and machine learning module
 - [Python.org](https://www.python.org/)
 - [Medium - Member Articles](https://medium.com/)
 - [datacamp](https://www.datacamp.com/de)
@@ -185,7 +213,6 @@ using PEP8 guidelines & CI Python Linter
 ### Content & Media
 - All content was written by the project developer, with usage of [ChatGPT](chatgpt.com) and [DeepL](https://www.deepl.com) for spelling, wording and correct grammar.
 - The icons in the dashboard were taken from [Streamlit emojis shortcodes]([https://fontawesome.com/](https://streamlit-emoji-shortcodes-streamlit-app-gwckff.streamlit.app/))
-
 
 
 ## Acknowledgements (optional)
