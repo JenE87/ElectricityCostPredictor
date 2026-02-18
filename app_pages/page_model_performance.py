@@ -19,7 +19,10 @@ def page_model_performance_body():
 
     st.info(
         "**Business Requirement 2:** Provide a prediction tool that estimates "
-        "monthly electricity cost for a given site profile.\n\n"
+        "monthly electricity cost for a given site profile."
+    )
+    
+    st.write(
         "This page explains how the final model performs and what its main "
         "limitations are."
     )

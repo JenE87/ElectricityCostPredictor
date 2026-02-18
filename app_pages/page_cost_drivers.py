@@ -16,7 +16,7 @@ def page_cost_drivers_body():
         "**Business Requirement 1:** Understand which site and operational "
         "factors influence electricity cost."
     )
-
+    
     st.write(
         "This page summarises the main cost drivers identified during analysis."
     )
