@@ -54,8 +54,6 @@ The project will be considered successful if:
 
 
 ## Hypotheses and how to validate?
-* List here your project hypothesis(es) and how you envision validating it (them)
-
 - **Hypothesis 1 - Site characteristics influence electricity cost**
    - Hypothesis: Electricity cost vary significantly depending on site characteristics such as site area, structure type, utilisation rate, and resident count.
    - Validation: This hypothesis will be validated through exploratory data analysis (EDA) and visualisations (e.g. correlation analysis) to identify which variables show strong relationships with electricity cost.
@@ -78,35 +76,32 @@ The project will be considered successful if:
 ## Epics and User Stories
 The project was divided into five epics, based on data visualisation and machine learning tasks.
 
-### Epic - Information Gathering and Data Collection
+### Epic 1 - Information Gathering and Data Collection
 - **User Story** - As a data analyst, I can import the electricity cost dataset from Kaggle so that I can work with a local copy of the data. 
 - **User Story** - As a data analyst, I can load and inspect the dataset so that I can understand its structure and contents.
 
-### Epic - Data Visualisation, Cleaning, and Preparation
+### Epic 2 - Data Visualisation, Cleaning, and Preparation
 - **User Story** - As a data analyst, I can explore and visualise the dataset so that I can identify factors influencing electricity cost (*Business Requirement 1*).
 - **User Story** - As a data analyst, I can clean the dataset and handle missing or inconsistent values to prepare it for modelling.
 - **User Story** - As a data scientist, I can perform feature engineering to improve the dataset for machine learning.
 
-### Epic - Model Training, Optimisation, and Validation
+### Epic 3 - Model Training, Optimisation, and Validation
 - **User Story** - As a data scientist, I can split the data into training and test sets to prepare it for modelling.
 - **User Story** - As a data scientist, I can train a regression model to predict electricity cost based on site characteristics (*Business Requirement 2*).
 - **User Story** - As a data scientist, I can evaluate and optimise the model to ensure it produces reliable predictions.
 
-### Epic - Dashboard Planning, Designing, and Development
+### Epic 4 - Dashboard Planning, Designing, and Development
 - **User Story** - As a non-technical user, I can view a project summary explaining the dataset and business requirements.
 - **User Story** - As a non-technical user, I can explore visualisations that explain which factors influence electricity cost (*Business Requirement 1*).
 - **User Story** - As a non-technical user, I can input site characteristics and receive an estimated electricity cost (*Business Requirement 2*).
 - **User Story** - As a technical user, I can view model performance metrics and validation results.
 
-### Epic - Dashboard Deployment and Release
+### Epic 5 - Dashboard Deployment and Release
 - **User Story** - As a user, I can access the dashboard via a publicly deployed web application.
 - **User Story** - As a technical user, I can follow the README instructions to reproduce or redeploy the project.
 
 
 ## Dashboard Design
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other item that your dashboard library supports.
-* Later, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but subsequently you used another plot type).
-
 ### Page 1: Project Summary
 - A brief project introduction
 - Dataset summary (source, size, target variable)
@@ -135,17 +130,22 @@ The project was divided into five epics, based on data visualisation and machine
 - Model performance metrics (e.g. R², RMSE)
 - Feature importance
 
-## Unfixed Bugs
-* You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
 
 ## Testing
-PEP8 validator
+### Manual Testing
+
+### Validation Testing
+using PEP8 guidelines & CI Python Linter
+
+### Fixed Bugs
+
+### Unfixed Bugs
+* You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
 
 ## Deployment
 ### Heroku
 
 * The App live link is: [Electricity Cost Predictor](https://electricity-cost-predictor-5d88feda62f8.herokuapp.com/)
-* Set the runtime.txt Python version to a [Heroku-24](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
 * The project was deployed to Heroku using the following steps.
 
 1. Log in to Heroku and create an App
@@ -159,22 +159,32 @@ PEP8 validator
 ## Main Data Analysis and Machine Learning Libraries
 * Here you should list the libraries you used in the project and provide an example(s) of how you used these libraries.
 
+- Python
+- NumPy
+- Pandas
+- Matplotlib
+- scikit-learn
+- Seaborn
+- Streamlit
+- joblib
+- Ydata-profiling
 
 ## Credits 
+### Code
+- Code Institute LMS course materials
+- [Python.org](https://www.python.org/)
+- [Medium - Member Articles](https://medium.com/)
+- [datacamp](https://www.datacamp.com/de)
+- [Stack Overflow](https://stackoverflow.com/questions)
+- [W3 schools](https://www.w3schools.com/)
+- [Geeksforgeeks - Machine Learning](https://www.geeksforgeeks.org/machine-learning/machine-learning/)
+- [freecodecamp](https://www.freecodecamp.org/news/)
+- Sololearn (App)
+- Programming Hub (App)
 
-* In this section, you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism. 
-* You can break the credits section up into Content and Media, depending on what you have included in your project. 
-
-### Content 
-
-- The text for the Home page was taken from Wikipedia Article A
-- Instructions on how to implement form validation on the Sign-Up page were taken from [Specific YouTube Tutorial](https://www.youtube.com/)
+### Content & Media
+- All content was written by the project developer, with usage of [ChatGPT](chatgpt.com) and [DeepL](https://www.deepl.com) for spelling, wording and correct grammar.
 - The icons in the dashboard were taken from [Streamlit emojis shortcodes]([https://fontawesome.com/](https://streamlit-emoji-shortcodes-streamlit-app-gwckff.streamlit.app/))
-
-### Media
-
-- The photos used on the home and sign-up page are from This Open-Source site
-- The images used for the gallery page were taken from this other open-source site
 
 
 
