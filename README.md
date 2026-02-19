@@ -77,6 +77,7 @@ The project will be considered successful if:
    - We evaluate the model using train/test split performance (R², RMSE, MAE).
    - Outcome: a Streamlit predictor that estimates monthly electricity cost for a user-defined site profile.
 
+[Back to top](#electricity-cost-predictor)
 
 ## ML Business Case
 ### Predict Electricity Cost
@@ -283,7 +284,6 @@ To install all the dependencies required for full local development and executio
 - **Ydata-profiling**
    Used during EDA to generate an automated profiling report that supported feature understanding and preprocessing decisions.
 
-[Back to top](#electricity-cost-predictor)
 
 ## Credits 
 ### Code
