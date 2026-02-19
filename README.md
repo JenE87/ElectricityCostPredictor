@@ -157,6 +157,7 @@ The project was divided into five epics, based on data visualisation and machine
 - Model performance metrics (e.g. R², RMSE)
 - Feature importance
 
+[Back to top](#electricity-cost-predictor)
 
 ## Testing
 ### Manual Testing
@@ -200,6 +201,7 @@ Minor warnings were identified and corrected, including:
 ### Unfixed Bugs
 No known unfixed bugs at the time of submission.
 
+[Back to top](#electricity-cost-predictor)
 
 ## Deployment
 ### Heroku
@@ -261,6 +263,8 @@ The `all-requirements.txt` file includes all the development and analysis depend
 To install all the dependencies required for full local development and execution of the notebooks, run the following command in your terminal:
 `pip install -r all-requirements.txt`
 
+[Back to top](#electricity-cost-predictor)
+
 ## Main Data Analysis and Machine Learning Libraries
 - **Pandas**
    Used for loading csv files, inspecting data, and preparing train/test splits (e.g., `pd.read_csv()`, `.value_counts()`, selecting columns).
@@ -278,6 +282,8 @@ To install all the dependencies required for full local development and executio
    Used to build and deploy the interactive dashboard application. It enables rapid development of data-driven web apps and was used to structure multi-page navigation, display visalisations, render model outputs, and collect user input for electricity cost prediction.
 - **Ydata-profiling**
    Used during EDA to generate an automated profiling report that supported feature understanding and preprocessing decisions.
+
+[Back to top](#electricity-cost-predictor)
 
 ## Credits 
 ### Code
@@ -300,3 +306,4 @@ To install all the dependencies required for full local development and executio
 ## Acknowledgements (optional)
 * Thank the people who provided support through this project.
 
+[Back to top](#electricity-cost-predictor)
