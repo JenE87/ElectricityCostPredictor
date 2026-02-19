@@ -208,7 +208,7 @@ No known unfixed bugs at the time of submission.
 The project was deployed to Heroku using the following steps:
 
 1. Ensure you have a `setup.sh` file in your working directory with the following code:
-   \````
+   ```
    mkdir -p ~/.streamlit/
    echo "\
    [server]\n\
@@ -217,7 +217,7 @@ The project was deployed to Heroku using the following steps:
    enableCORS = false\n\
    \n\
    " > ~/.streamlit/config.toml
-   \````
+   ```
 2. In the `.python-version` file ensure that it contains a [Heroku-24](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack supported version of Python (e.g., `3.12`)
 3. Ensure you have a Procfile in the working directory with the following code:
    `web: sh setup.sh && streamlit run app.py`
