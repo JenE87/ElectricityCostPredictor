@@ -303,7 +303,7 @@ To install all the dependencies required for full local development and executio
 
 ### Content & Media
 - All content was written by the project developer, with usage of [ChatGPT](chatgpt.com) and [DeepL](https://www.deepl.com) for spelling, wording and correct grammar.
-- The icons in the dashboard were taken from [Streamlit emojis shortcodes](https://fontawesome.com/](https://streamlit-emoji-shortcodes-streamlit-app-gwckff.streamlit.app/)
+- The icons in the dashboard were taken from [Streamlit emojis shortcodes](https://streamlit-emoji-shortcodes-streamlit-app-gwckff.streamlit.app/)
 
 
 ## Acknowledgements (optional)
