@@ -175,7 +175,15 @@ The project was divided into five epics, based on data visualisation and machine
 | Data - Feature importance file | Open Model Performance page and toggle "Show feature importance" | Table and png display | Pass |
 
 ### Validation Testing
-using PEP8 guidelines & CI Python Linter
+All Python files in `app_pages/`, `src/` and `app.py` were validated using the [CI Python Linter](https://pep8ci.herokuapp.com/) with no remaining errors, as per PEP8 guidelines.
+
+Minor warnings were identified and corrected, including:
+- Ensuring top-level functions and class definitions are surrounded by 2 blank lines
+- Breaking up long lines to comply with the 79-character limit
+- Removing trailing whitespace and unnecessary blank lines
+- Adding missing whitespace around operators and commas 
+- Fixing indentation inconsistencies
+- Removing unused imports
 
 ### Fixed Bugs
 - **Missing `structure_type` column in dataset preview** (Electricity Cost Driver Analysis page)
