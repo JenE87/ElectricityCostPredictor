@@ -203,20 +203,56 @@ No known unfixed bugs at the time of submission.
 
 ## Deployment
 ### Heroku
+- The App live link is: [Electricity Cost Predictor](https://electricity-cost-predictor-5d88feda62f8.herokuapp.com/)
 
-* The App live link is: [Electricity Cost Predictor](https://electricity-cost-predictor-5d88feda62f8.herokuapp.com/)
-* The project was deployed to Heroku using the following steps.
+The project was deployed to Heroku using the following steps:
 
-1. Log in to Heroku and create an App
-2. At the Deploy tab, select GitHub as the deployment method.
-3. Select your repository name and click Search. Once it is found, click Connect.
-4. Select the branch you want to deploy, then click Deploy Branch.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
-6. If the slug size is too large then add large files not required for the app to the .slugignore file.
+1. Ensure you have a `setup.sh` file in your working directory with the following code:
+   `
+   mkdir -p ~/.streamlit/
+   echo "\
+   [server]\n\
+   headless = true\n\
+   port = $PORT\n\
+   enableCORS = false\n\
+   \n\
+   " > ~/.streamlit/config.toml
+   `
+2. In the `.python-version` file ensure that it contains a [Heroku-24](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack supported version of Python (e.g., `3.12`)
+3. Ensure you have a Procfile in the working directory with the following code:
+   `web: sh setup.sh && streamlit run app.py`
+4. Log in to [Heroku](https://id.heroku.com/login) or create an account
+5. On the dashboard in the top-right corner first click **New** and then **Create new app**
+6. Choose a unique **App name**
+7. Choose your local **Location** (e.g., `Europe`)
+8. Click **Create app**
+9. In the **Deploy tab**, under **deployment method** select **GitHub** as the deployment method.
+10. Enter your repository name and click **Search**. Once found, click **Connect**.
+11. Select the branch you want to deploy (e.g., `main`), then under **Manual Deploy** click **Deploy Branch**. 
+12. Once your app has been successfully deployed, you can access it by clicking the **View** button at the bottom of the Manual Deploy section or the **Open App** at the top of the page.
 
-## Forking
+**Note:**
+The deployment process should happen smoothly if all deployment files are fully functional.
+If the deployment fails, check the build log for details of where troubleshooting is required.
+For example, if the slug size is too large then add large files not required for the app to the `.slugignore` file.
 
-## Cloning
+## Forking and Cloning
+Should you wish to fork or clone this repository, please follow the instructions below:
+
+### Forking
+1. On the main repository page, click the **Fork** button in the top-right corner.
+2. Choose the desired **Owner** for the fork from the dropdown menu.
+3. *(Optional)* Change the **repository name** if you want to distinguish it from the original.
+4. *(Optional)* Add a **description** in the designated field.
+5. Ensure **Copy the `main` branch only** is checked.
+6. Click the **Create fork** button to finish forking the repository.
+
+### Cloning
+1. On the main repository page above the list of files, click the **<> Code** button.
+2. Copy the URL (`https://github.com/...`) provided under Local > HTTPS.
+3. Open a terminal in your IDE and navigate to the directory in which you want to create the cloned repository.
+4. In your IDE terminal type `git clone` and paste the URL copied earlier (`git clone https://github.com/USERNAME/REPONAME`)
+5. Press **Enter** to create your local cloned repository.
 
 ### Installing Requirements
 The `requirements.txt` file only contains the packages required for dashboard deployment. 
