@@ -206,6 +206,16 @@ No known unfixed bugs at the time of submission.
 5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
 6. If the slug size is too large then add large files not required for the app to the .slugignore file.
 
+## Forking
+
+## Cloning
+
+### Installing Requirements
+The `requirements.txt` file only contains the packages required for dashboard deployment. 
+The `all-requirements.txt` file includes all the development and analysis dependencies used in the notebook. 
+
+To install all the dependencies required for full local development and execution of the notebooks, run the following command in your terminal:
+`pip install -r all-requirements.txt`
 
 ## Main Data Analysis and Machine Learning Libraries
 - **Pandas**
