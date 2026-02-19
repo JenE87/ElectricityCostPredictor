@@ -3,11 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from src.data_management import load_electricity_data, load_electricity_data_raw
+from src.data_management import (
+    load_electricity_data, load_electricity_data_raw)
+
 
 def page_cost_drivers_body():
     """
-    Render the EDA & Cost Drivers page, readable for non-technical users with 
+    Render the EDA & Cost Drivers page, readable for non-technical users with
     optional deeper detail.
     """
     st.write("### Electricity Cost Drivers Analysis")
@@ -16,9 +18,10 @@ def page_cost_drivers_body():
         "**Business Requirement 1:** Understand which site and operational "
         "factors influence electricity cost."
     )
-    
+
     st.write(
-        "This page summarises the main cost drivers identified during analysis."
+        "This page summarises the main cost drivers identified during "
+        "analysis."
     )
 
     df = load_electricity_data()
@@ -30,10 +33,11 @@ def page_cost_drivers_body():
     st.success(
         "* Electricity cost generally increases with **site scale** and "
         "**operational intensity**.\n"
-        "* The strongest drivers observed were typically **site area**, **water "
-        "consumption**, **utilisation rate**, and **resident/occupant count**.\n"
+        "* The strongest drivers observed were typically **site area**, "
+        "**water consumption**, **utilisation rate**, and **resident/occupant "
+        "count**.\n"
         "* Some factors have weaker direct relationships, but still improve "
-        "estimates when combined." 
+        "estimates when combined."
     )
 
     st.write("---")
@@ -54,21 +58,26 @@ def page_cost_drivers_body():
             ]
 
             available_cols = [c for c in base_cols if c in df_raw.columns]
-        
+
             st.caption(
                 f"Dataset preview showing original fields "
                 f"({df_raw.shape[0]:,} rows total):"
             )
             st.dataframe(df_raw[available_cols].head(10))
-        
 
         if st.checkbox("Show correlation study (numeric features)"):
             st.caption(
-                "Correlation values indicate how strongly variables are related "
-                "(positive or negative). Values closer to 0 indicate a weaker relationship.",
+                "Correlation values indicate how strongly variables are "
+                "related (positive or negative). Values closer to 0 indicate "
+                "a weaker relationship."
             )
 
-            numeric_cols = df.select_dtypes(include=["int64", "float64"]).columns.tolist()
+            numeric_cols = (
+                df
+                .select_dtypes(include=["int64", "float64"])
+                .columns
+                .tolist()
+            )
 
             corr = (
                 df[numeric_cols]
@@ -77,7 +86,13 @@ def page_cost_drivers_body():
                 .sort_values(key=lambda s: s.abs(), ascending=False)
             )
 
-            st.dataframe(corr.to_frame("correlation").style.format({"correlation": "{:.3f}"}))
+            corr_df = corr.to_frame("correlation")
+
+            styled_corr = corr_df.style.format(
+                {"correlation": "{:.3f}"}
+            )
+
+            st.dataframe(styled_corr)
 
             st.write("#### Top correlated features")
             top_corr = corr.abs().head(8).sort_values()
@@ -88,10 +103,10 @@ def page_cost_drivers_body():
             axes.set_ylabel("Feature")
             st.pyplot(fig)
 
-
         if st.checkbox("Show structure type distribution"):
             st.caption(
-                "This shows how many sites of each structure type are in the dataset."
+                "This shows how many sites of each structure type are in "
+                "the dataset."
             )
 
             counts = df_raw["structure_type"].value_counts()
@@ -104,11 +119,13 @@ def page_cost_drivers_body():
             plt.xticks(rotation=45, ha="right")
             st.pyplot(fig)
 
-
-        if st.checkbox("Show electricity cost for sites with vs without residents"):
+        if st.checkbox(
+            "Show electricity cost for sites with vs without residents"
+        ):
             st.caption(
-                "This compares electricity cost between sites that have residents and those that "
-                "do not (e.g., commercial or industrial sites)."
+                "This compares electricity cost between sites that have "
+                "residents and those that do not (e.g., commercial or "
+                "industrial sites)."
             )
 
             df_plot = df_raw.copy()
@@ -127,27 +144,31 @@ def page_cost_drivers_body():
             ax.set_ylabel("Electricity cost (USD)")
             st.pyplot(fig)
 
-
         # Feature importance (Notebook 04 outputs)
         if st.checkbox("Show model-based cost drivers (feature importance)"):
             version = "v1"
             model_path = f"outputs/ml_pipeline/electricity_cost/{version}"
 
             st.caption(
-                "This view shows which inputs the trained model relied on most when producing estimates."
+                "This view shows which inputs the trained model relied on "
+                "most when producing estimates."
             )
 
             feat_imp = pd.read_csv(f"{model_path}/feature_importance.csv")
             st.write("#### Feature importance table (top 10)")
             st.dataframe(feat_imp.head(10))
 
-            st.image(f"{model_path}/feature_importance.png",
-                    caption="Feature importance (Random Forest)")
-
+            st.image(
+                f"{model_path}/feature_importance.png",
+                caption="Feature importance (Random Forest)"
+            )
 
         # Interactive relationship plot
         if st.checkbox("Explore relationships (scatter plot)"):
-            st.caption("Select a variable to see how it relates to electricity cost across sites.")
+            st.caption(
+                "Select a variable to see how it relates to electricity cost "
+                "across sites."
+            )
 
             candidates = [
                 "site_area",

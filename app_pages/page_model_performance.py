@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from sklearn.metrics import r2_score, root_mean_squared_error, mean_absolute_error
+from sklearn.metrics import (
+    r2_score, root_mean_squared_error, mean_absolute_error)
 
 from src.data_management import load_pkl_file
 
@@ -11,8 +12,9 @@ def page_model_performance_body():
     """
     Render the Model Performance page.
 
-    This page is aimed at technical / data-practitioner readers. It summarises
-    the final model choice and evaluates performance on saved train/test splits.
+    This page is for technical / data-practitioner readers.
+    It summarises the final model choice and evaluates performance
+    on saved train/test splits.
     """
 
     st.write("### Model Performance")
@@ -21,7 +23,7 @@ def page_model_performance_body():
         "**Business Requirement 2:** Provide a prediction tool that estimates "
         "monthly electricity cost for a given site profile."
     )
-    
+
     st.write(
         "This page explains how the final model performs and what its main "
         "limitations are."
@@ -43,23 +45,26 @@ def page_model_performance_body():
     st.write("#### Final Model Selection")
 
     st.success(
-        "A **Random Forest Regressor** was selected as the final model because "
-        "it achieved strong predictive performance on the test set and can "
-        "capture non-linear relationships between site characteristics and "
-        "electricity cost."
+        "A **Random Forest Regressor** was selected as the final model "
+        "because it achieved strong predictive performance on the test set "
+        "and can capture non-linear relationships between site "
+        "characteristics and electricity cost."
     )
 
     st.write("---")
 
     def regression_metrics(y_true, y_pred):
         """
-        Helper function to compute metrics
+        Helper function to compute regression metrics
+
+        Returns:
+            tuple: (r2, rmse, mae)
         """
         r2 = r2_score(y_true, y_pred)
         rmse = root_mean_squared_error(y_true, y_pred)
         mae = mean_absolute_error(y_true, y_pred)
         return r2, rmse, mae
-    
+
     y_train_pred = model.predict(X_train)
     y_test_pred = model.predict(X_test)
 
@@ -83,18 +88,19 @@ def page_model_performance_body():
     with col3:
         st.metric("MAE (Train)", f"{mae_train:,.1f}")
         st.metric("MAE (Test)", f"{mae_test:,.1f}")
-    
+
     st.caption(
         "R² indicates how much variance in electricity cost is explained by "
         "the model (closer to 1 is better). RMSE and MAE are error measures "
         "in USD; lower is better."
     )
 
-    st.caption("")
+    st.write("")
 
     with st.expander(
         "Technical Details (features, plots, importance)",
-        expanded=False):
+        expanded=False
+    ):
 
         st.write("#### Features used for training")
         st.caption(
@@ -106,7 +112,7 @@ def page_model_performance_body():
         if st.checkbox("Show feature list"):
             model_features = load_pkl_file(f"{model_path}/model_features.pkl")
             st.write(model_features)
-        
+
         st.write("---")
 
         st.write("#### Visual validation (test set)")
@@ -134,7 +140,7 @@ def page_model_performance_body():
             axes.set_ylabel("Predicted electricity_cost (USD)")
             axes.set_title("Actual vs Predicted (Test Set)")
             st.pyplot(fig)
-        
+
         if st.checkbox("Show residual distribution"):
             st.caption(
                 "Residuals are the difference between actual and predicted "
@@ -142,13 +148,13 @@ def page_model_performance_body():
             )
 
             residuals = y_test - y_test_pred
-            fig, axes = plt.subplots(figsize=(6,4))
+            fig, axes = plt.subplots(figsize=(6, 4))
             axes.hist(residuals, bins=40)
             axes.set_xlabel("Residual (Actual - Predicted)")
             axes.set_ylabel("Frequency")
             axes.set_title("Residual Distribution (Test Set)")
             st.pyplot(fig)
-        
+
         st.write("---")
 
         st.write("#### Feature importance (model-based cost drivers)")
@@ -184,7 +190,8 @@ def page_model_performance_body():
     )
 
     st.success(
-        "**Conclusion (BR2):** The Random Forest model demonstrates strong test "
-        "performance and is suitable for producing **consistent electricity "
-        "cost estimates** to support budgeting and planning decisions."
+        "**Conclusion (BR2):** The Random Forest model demonstrates strong "
+        "test performance and is suitable for producing **consistent "
+        "electricity cost estimates** to support budgeting and planning "
+        "decisions."
     )
