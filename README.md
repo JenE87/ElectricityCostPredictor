@@ -72,7 +72,7 @@ The project will be considered successful if:
 
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
 - **Business Requirement 1 (Data Visualization and Correlation Analysis)**
-   - BR1 is addressed on dashboard page **Electricity Cost Driver Analysis** (main insights, correlation, cost driver plots) and supported by page **Project Hypothesss & Validation**.
+   - BR1 is addressed on dashboard page **Electricity Cost Driver Analysis** (main insights, correlation, cost driver plots) and supported by page **Project Hypotheses & Validation**.
    - We use **EDA** and **visualizations** to show how each feature relates to electricity cost.
    - Techniques include: dataset inspection, distribution plots, and correlation analysis (numeric features).
    - Outcome: clear summary of strongest drivers (e.g., site area, utilisation/occupancy patterns).
@@ -89,14 +89,14 @@ The project will be considered successful if:
 **Regression Model**
 - We want a machine learning model to predict **monthly electricity cost (USD)** for a site based on its physical and operational characteristics. The target variable, `electricity_cost`, is **continuous numeric data**, so we consider a **regression model**. This is a **supervised learning** task with a single numeric output.
 - The ideal outcome is to provide the client (facilities/cost manager) with a consistent and repeatable estimate of monthly electricity cost for different site profiles, to support budgeting and planning decisions.
-- The model success metrics are:
-   - Strong generalisation performance on unseen data, assessed on a held-out test set using:
-      - R² score (explained variance)
-      - RMSE (typical size of prediction error in USD)
-      - MAE (average absolute error in USD)
-- The model is considered a failure if:
-   - Performance on the test set is poor enough that predictions are not useful for planning (e.g., low R² and/or large error metrics), or
-   - There is a large gap between train vs test results, indicating strong overfitting and unreliable generalisation.
+- **Model success metrics (test set)**:
+   - R² score ≥ 0.90
+   - RMSE ≤ 300 USD
+   - MAE ≤ 250 USD
+   - **Result:** The final Random Forest model meets the success criteria on the held-out test set.
+- **Model failure criteria**:
+   - R² < 0.85 or RMSE > 400 USD, indicating predictions are not reliable enough for planning, or
+   - Overfitting indicated by a large train/test gap (e.g., Train R² - Test R² > 0.05).
 - The model output is defined as a single predicted electricity cost value (USD/month) for a user-provided site profile. Predictions are generated on demand in the Streamlit dashboard (not in batches).
    - Predictions are most reliable when input values fall within the ranges observed in the training dataset.
 - Heuristics: Currently, the client has no data-driven approach for estimating electricity cost across varying site profiles and relies on manual judgement and rough comparisons.
