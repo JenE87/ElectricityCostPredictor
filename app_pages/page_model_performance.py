@@ -8,6 +8,19 @@ from sklearn.metrics import (
 from src.data_management import load_pkl_file
 
 
+def regression_metrics(y_true, y_pred):
+    """
+    Helper function to compute regression metrics
+
+    Returns:
+        tuple: (r2, rmse, mae)
+    """
+    r2 = r2_score(y_true, y_pred)
+    rmse = root_mean_squared_error(y_true, y_pred)
+    mae = mean_absolute_error(y_true, y_pred)
+    return r2, rmse, mae
+
+
 def page_model_performance_body():
     """
     Render the Model Performance page.
@@ -53,18 +66,6 @@ def page_model_performance_body():
 
     st.write("---")
 
-    def regression_metrics(y_true, y_pred):
-        """
-        Helper function to compute regression metrics
-
-        Returns:
-            tuple: (r2, rmse, mae)
-        """
-        r2 = r2_score(y_true, y_pred)
-        rmse = root_mean_squared_error(y_true, y_pred)
-        mae = mean_absolute_error(y_true, y_pred)
-        return r2, rmse, mae
-
     y_train_pred = model.predict(X_train)
     y_test_pred = model.predict(X_test)
 
@@ -94,6 +95,91 @@ def page_model_performance_body():
         "the model (closer to 1 is better). RMSE and MAE are error measures "
         "in USD; lower is better."
     )
+
+    st.write("#### Success criteria (from ML Business Case)")
+
+    # Success thresholds (test set)
+    success_r2 = 0.90
+    success_rmse = 300
+    success_mae = 250
+
+    # Failure thresholds
+    fail_r2 = 0.85
+    fail_rmse = 400
+    gap_threshold = 0.05
+
+    meets_r2 = r2_test >= success_r2
+    meets_rmse = rmse_test <= success_rmse
+    meets_mae = mae_test <= success_mae
+    criteria_pass = meets_r2 and meets_rmse and meets_mae
+
+    train_test_gap = r2_train - r2_test
+    gap_ok = train_test_gap <= gap_threshold
+
+    st.caption(
+        f"Targets (test set): R² ≥ {success_r2}, RMSE ≤ {success_rmse} USD, "
+        f"MAE ≤ {success_mae} USD. Overfitting check: Train-Test R² "
+        f"gap ≤ {gap_threshold}. Guardrails are defined for R² and RMSE."
+    )
+
+    failure_triggered = (
+        (r2_test < fail_r2)
+        or (rmse_test > fail_rmse)
+        or (not gap_ok)
+    )
+
+    if criteria_pass and gap_ok:
+        st.success(
+            "The final model meets the success criteria on the held-out "
+            "test set and shows no concerning train/test gap."
+        )
+    elif failure_triggered:
+        st.warning(
+            "The model is below the minimum reliability guardrails "
+            "and/or shows a large train/test gap."
+        )
+    else:
+        st.warning(
+            "The model is in a borderline range: it does not meet "
+            "all target thresholds, but is still above the minimum guardrails."
+        )
+
+    st.write("**Criteria checklist (test set):**")
+
+    checklist = pd.DataFrame(
+        {
+            "Metric": [
+                "R² (Test)",
+                "RMSE (Test)",
+                "MAE (Test)",
+                "Train–Test R² gap"
+            ],
+            "Actual": [
+                f"{r2_test:.3f}",
+                f"{rmse_test:.2f} USD",
+                f"{mae_test:.2f} USD",
+                f"{train_test_gap:.3f}"
+            ],
+            "Target": [
+                f"≥ {success_r2}",
+                f"≤ {success_rmse} USD",
+                f"≤ {success_mae} USD",
+                f"≤ {gap_threshold}"
+            ],
+            "Status": [
+                "✅" if meets_r2
+                else ("❌" if r2_test < fail_r2 else "⚠️"),
+                "✅" if meets_rmse
+                else ("❌" if rmse_test > fail_rmse else "⚠️"),
+                "✅" if meets_mae
+                else "⚠️",
+                "✅" if gap_ok
+                else "❌",
+            ],
+        }
+    )
+
+    st.dataframe(checklist, hide_index=True, use_container_width=True)
 
     st.write("")
 
@@ -168,6 +254,10 @@ def page_model_performance_body():
             feat_imp = pd.read_csv(f"{model_path}/feature_importance.csv")
             st.write("Top 10 features by importance:")
             st.dataframe(feat_imp.head(10))
+            st.caption(
+                "Higher values indicate greater contribution to predictions "
+                "within this model."
+            )
 
             st.image(
                 f"{model_path}/feature_importance.png",
