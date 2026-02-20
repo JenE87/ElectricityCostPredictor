@@ -97,6 +97,7 @@ The project will be considered successful if:
 - **Model failure criteria**:
    - R² < 0.85 or RMSE > 400 USD, indicating predictions are not reliable enough for planning, or
    - Overfitting indicated by a large train/test gap (e.g., Train R² - Test R² > 0.05).
+   - **Note:** If success thresholds are not met, but the model remains above the minimum guardrails, results are considered **borderline** and should be used with caution.
 - The model output is defined as a single predicted electricity cost value (USD/month) for a user-provided site profile. Predictions are generated on demand in the Streamlit dashboard (not in batches).
    - Predictions are most reliable when input values fall within the ranges observed in the training dataset.
 - Heuristics: Currently, the client has no data-driven approach for estimating electricity cost across varying site profiles and relies on manual judgement and rough comparisons.
