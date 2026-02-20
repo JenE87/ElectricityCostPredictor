@@ -93,7 +93,7 @@ The project will be considered successful if:
    - R² score ≥ 0.90
    - RMSE ≤ 300 USD
    - MAE ≤ 250 USD
-   - **Result:** The final Random Forest model meets the success criteria on the held-out test set.
+   - **Result:** The final Random Forest model meets the success criteria on the held-out test set and does not show a concerning train/test gap.
 - **Model failure criteria**:
    - R² < 0.85 or RMSE > 400 USD, indicating predictions are not reliable enough for planning, or
    - Overfitting indicated by a large train/test gap (e.g., Train R² - Test R² > 0.05).
