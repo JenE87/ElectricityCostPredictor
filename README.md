@@ -72,10 +72,12 @@ The project will be considered successful if:
 
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
 - **Business Requirement 1 (Data Visualization and Correlation Analysis)**
+   - BR1 is addressed on dashboard page **Electricity Cost Driver Analysis** (main insights, correlation, cost driver plots) and supported by page **Project Hypothesss & Validation**.
    - We use **EDA** and **visualizations** to show how each feature relates to electricity cost.
    - Techniques include: dataset inspection, distribution plots, and correlation analysis (numeric features).
    - Outcome: clear summary of strongest drivers (e.g., site area, utilisation/occupancy patterns).
 - **Business Requirement 2 (Regression & Data Analysis)**
+   - BR2 is addressed on dashboard page **Electricity Cost Prediction** (live predictions from user inputs) and **Model Performance** (train/test metrics, plots, feature importance, limitations).
    - We train a **supervised regression model** using the cleaned dataset.
    - We evaluate the model using train/test split performance (R², RMSE, MAE).
    - Outcome: a Streamlit predictor that estimates monthly electricity cost for a user-defined site profile.
