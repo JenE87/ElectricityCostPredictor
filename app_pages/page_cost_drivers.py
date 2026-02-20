@@ -65,6 +65,7 @@ def page_cost_drivers_body():
             )
             st.dataframe(df_raw[available_cols].head(10))
 
+        # Correlation section
         if st.checkbox("Show correlation study (numeric features)"):
             st.caption(
                 "Correlation values indicate how strongly variables are "
@@ -95,6 +96,10 @@ def page_cost_drivers_body():
             st.dataframe(styled_corr)
 
             st.write("#### Top correlated features")
+            st.caption(
+                "Bars show the strongest linear relationships with "
+                "electricity cost (higher values = stronger association)."
+            )
             top_corr = corr.abs().head(8).sort_values()
 
             fig, axes = plt.subplots()
@@ -103,6 +108,7 @@ def page_cost_drivers_body():
             axes.set_ylabel("Feature")
             st.pyplot(fig)
 
+        # Structure type distribution
         if st.checkbox("Show structure type distribution"):
             st.caption(
                 "This shows how many sites of each structure type are in "
@@ -119,6 +125,7 @@ def page_cost_drivers_body():
             plt.xticks(rotation=45, ha="right")
             st.pyplot(fig)
 
+        # Residents vs no residents boxplot
         if st.checkbox(
             "Show electricity cost for sites with vs without residents"
         ):
@@ -158,12 +165,18 @@ def page_cost_drivers_body():
             st.write("#### Feature importance table (top 10)")
             st.dataframe(feat_imp.head(10))
 
+            st.caption(
+                "Higher importance means the model relied more on that "
+                "feature when making predictions. It does not indicate "
+                "whether the feature increases or decreases electricity cost."
+            )
+
             st.image(
                 f"{model_path}/feature_importance.png",
                 caption="Feature importance (Random Forest)"
             )
 
-        # Interactive relationship plot
+        # Interactive Scatter plot (relationships)
         if st.checkbox("Explore relationships (scatter plot)"):
             st.caption(
                 "Select a variable to see how it relates to electricity cost "
@@ -182,6 +195,12 @@ def page_cost_drivers_body():
             available = [c for c in candidates if c in df.columns]
 
             feature = st.selectbox("Choose a variable", options=available)
+
+            st.caption(
+                "A clear upward/downward pattern suggests a stronger "
+                "relationship; a more scattered cloud suggests a weaker "
+                "relationship."
+            )
 
             fig2, ax2 = plt.subplots()
             ax2.scatter(df[feature], df["electricity_cost"], alpha=0.4)
