@@ -1,6 +1,6 @@
 # Electricity Cost Predictor
 [Electricity Cost Predictor](https://electricity-cost-predictor-5d88feda62f8.herokuapp.com/) is a machine learning (ML) project using a publicly available dataset to determine whether a regression pipeline can be built to estimate monthly electricity cost for different site profiles.
-This was achieved bny training a supervised regression model using `electricity_cost` as the target variable and site and operational characteristics (such as site are, utilisation rate, water consumption, and resident count) as features.
+This was achieved by training a supervised regression model using `electricity_cost` as the target variable and site and operational characteristics (such as site area, utilisation rate, water consumption, and resident count) as features.
 The project combines exploratory data analysis, feature engineering, and model evaluation within an interactive Streamlit dashboard to support budgeting and planning decisions.
 
 ## Table of Contents 
