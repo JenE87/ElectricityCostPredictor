@@ -157,7 +157,7 @@ def page_predict_electricity_cost_body():
         water_default = int(df["water_consumption"].median())
 
         water_consumption = st.number_input(
-            "Water consumption (litres/day)",
+            "Water consumption (liters/day)",
             min_value=water_min,
             max_value=water_max,
             value=water_default,
