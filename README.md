@@ -60,14 +60,17 @@ The project will be considered successful if:
 
 ## Hypotheses and how to validate them
 - **Hypothesis 1 - Site characteristics influence electricity cost**
-   - Hypothesis: Electricity cost vary significantly depending on site characteristics such as site area, structure type, utilisation rate, and resident count.
-   - Validation: This hypothesis will be validated through exploratory data analysis (EDA) and visualisations (e.g. correlation analysis) to identify which variables show strong relationships with electricity cost.
+   - **Hypothesis:** Electricity cost vary significantly depending on site characteristics such as site area, structure type, utilisation rate, and resident count.
+   - **Validation:** This hypothesis will be validated through exploratory data analysis (EDA) and visualisations (e.g. correlation analysis) to identify which variables show strong relationships with electricity cost.
+   - **Statistical Evidence:** Correlation analysis of numeric variables showed that **site_area**, **water_consumption (and its log-transformed variant**, **resident_count**, and **utilisation_rate** had the strongest absolute correlations with `electricity_cost`. While water consumption exhibits a strong positive correlation, it is interpreted as a **proxy for site scale and operational intensity**, which are the underlying drivers of electricity usage. Model-based feature importance from the Random Forest further confirmed **site_area** as the dominant predictor.
 - **Hypothesis 2 - Operational intensity is a strong cost driver**
-   - Hypothesis: Sites with higher operational intensity (e.g. higher utilisation rate or resident count) have higher electricity cost than less intensively used sites.
-   - Validation: This will be validated by analysing electricity cost across different operational usage levels and visualising trends between operational variables and electricity cost.
+   - **Hypothesis:** Sites with higher operational intensity (e.g. higher utilisation rate or resident count) have higher electricity cost than less intensively used sites.
+   - **Validation:** This will be validated by analysing electricity cost across different operational usage levels and visualising trends between operational variables and electricity cost.
+   - **Statistical Evidence:** Boxplot comparisons showed higher median electricity costs for sites with residents compared to those without. Additionally, both `resident_count` and `utilisation_rate` showed positive correlation values with electrictiy cost, supporting the hypothesis that operational intensity increases expenditure.
 - **Hypothesis 3 - A regression model can predict electricity cost with acceptable accuracy**
-   - Hypothesis: A supervised machine learning regression model trained on site and operational features can predict electricity cost with reasonable accuracy.
-   - Validation: This hypothesis will be validated by training a regression model and evaluating its performance using appropriate metrics such as R² and RMSE on a held-out test set.
+   - **Hypothesis:** A supervised machine learning regression model trained on site and operational features can predict electricity cost with reasonable accuracy.
+   - **Validation:** This hypothesis will be validated by training a regression model and evaluating its performance using appropriate metrics such as R² and RMSE on a held-out test set.
+   - **Statistical Evidence:** The final Random Forest model achieved **R² ≈ 0.96**, **RMSE ≈ 218 USD**, and **MAE ≈ 172 USD** on the test set, meeting the predefined success criteria and showing no concerning train/test performance gap.
 
 
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
