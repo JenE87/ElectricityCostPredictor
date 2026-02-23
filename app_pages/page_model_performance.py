@@ -213,7 +213,7 @@ def page_model_performance_body():
                 "predictions. Larger deviations indicate higher uncertainty."
             )
 
-            fig, axes = plt.subplots(figsize=(6, 6,))
+            fig, axes = plt.subplots(figsize=(6, 6))
             axes.scatter(y_test, y_test_pred, alpha=0.2, color="tab:blue")
             axes.plot(
                 [y_test.min(), y_test.max()],
