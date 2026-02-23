@@ -185,6 +185,41 @@ The project was divided into five epics, based on data visualisation and machine
 | Data - Model artefacts exist | Open Model Performance page | Model and X/y splits load successfully | Pass |
 | Data - Feature importance file | Open Model Performance page and toggle "Show feature importance" | Table and png display | Pass |
 
+### User Story Testing
+**Epic 1 - Information Gathering and Data Collection**
+| User Story | How it was tested | Result |
+|------------|-------------------|--------|
+| As a data analyst, I can import the electricity cost dataset from Kaggle so that I can work with a local copy of the data. | Ran Notebook 01 and confirmed the dataset downloads, unzips successfully, and is saved to `outputs/datasets/collection/`. | Pass |
+| As a data analyst, I can load and inspect the dataset so that I can understand its structure and contents. | Ran Notebook 01 checks (`head()`, `shape`, `info()`, missing value check). | Pass |
+
+**Epic 2 - Data Visualisation, Cleaning, and Preparation**
+| User Story | How it was tested | Result |
+|------------|-------------------|--------|
+| As a data analyst, I can explore and visualise the dataset so that I can identify factors influencing electricity cost (BR1). | Ran Notebook 02 EDA and verified visuals/correlation study. Confirmed dashboard page “Electricity Cost Driver Analysis” displays plots and explanations. | Pass |
+| As a data analyst, I can clean the dataset and handle missing or inconsistent values to prepare it for modelling. | Ran Notebook(s) covering cleaning/standardisation and confirmed cleaned dataset is generated and used by the dashboard without missing columns. | Pass |
+| As a data scientist, I can perform feature engineering to improve the dataset for machine learning. | Ran feature engineering steps (e.g., resident grouping / log transform) and confirmed engineered features align with the model feature list used in the app. | Pass |
+
+**Epic 3 - Model Training, Optimisation, and Validation**
+| User Story | How it was tested | Result |
+|------------|-------------------|--------|
+| As a data scientist, I can split the data into training and test sets to prepare it for modelling. | Ran Notebook 04 train/test split and confirmed `X_train`, `X_test`, `y_train`, `y_test` are saved and loaded in the Model Performance page. | Pass |
+| As a data scientist, I can train a regression model to predict electricity cost based on site characteristics (BR2). | Trained baseline and final model in Notebook 04 and saved the final model artifact (`random_forest_model.pkl`). | Pass |
+| As a data scientist, I can evaluate and optimise the model to ensure it produces reliable predictions. | Verified evaluation metrics and plots in Notebook 04 and confirmed success criteria checklist appears on the Model Performance page. | Pass |
+
+**Epic 4 - Dashboard Planning, Designing, and Development**
+| User Story | How it was tested | Result |
+|------------|-------------------|--------|
+| As a non-technical user, I can view a project summary explaining the dataset and business requirements. | Opened dashboard “Quick Project Summary” page and verified dataset summary + BRs appear. | Pass |
+| As a non-technical user, I can explore visualisations that explain which factors influence electricity cost (BR1). | Opened “Electricity Cost Driver Analysis” page and verified correlation/plots render with captions. | Pass |
+| As a non-technical user, I can input site characteristics and receive an estimated electricity cost (BR2). | Used the “Electricity Cost Prediction” page widgets and confirmed a prediction plus interpretation is returned. | Pass |
+| As a technical user, I can view model performance metrics and validation results. | Opened “Model Performance” page and checked metrics, criteria checklist, and optional plots/feature importance. | Pass |
+
+**Epic 5 - Dashboard Deployment and Release**
+| User Story | How it was tested | Result |
+|------------|-------------------|--------|
+| As a user, I can access the dashboard via a publicly deployed web application. | Opened the live Heroku URL and navigated across all pages. | Pass |
+| As a technical user, I can follow the README instructions to reproduce or redeploy the project. | Followed README steps (install requirements, run app, deployment section). Confirmed required deployment files exist (Procfile, setup.sh, requirements files, runtime.txt). | Pass |
+
 ### Validation Testing
 All Python files in `app_pages/`, `jupyter_notebooks`, `src/` and `app.py` were validated using the [CI Python Linter](https://pep8ci.herokuapp.com/) with no remaining errors, as per PEP8 guidelines.
 
@@ -228,7 +263,7 @@ The project was deployed to Heroku using the following steps:
    \n\
    " > ~/.streamlit/config.toml
    ```
-2. In the `.python-version` file ensure that it contains a [Heroku-24](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack supported version of Python (e.g., `3.12`)
+2. In the `runtime.txt` file ensure that it contains a [Heroku-24](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack supported version of Python (e.g., `python-3.12.1`)
 3. Ensure you have a Procfile in the working directory with the following code:
    `web: sh setup.sh && streamlit run app.py`
 4. Log in to [Heroku](https://id.heroku.com/login) or create an account
