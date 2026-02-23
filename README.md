@@ -203,8 +203,6 @@ Minor warnings were identified and corrected, including:
    Fix: Standardised column names and corrected known typos (e.g., `air qality index` → `air_quality_index`, `issue reolution time` → `issue_resolution_time`) in the raw dataset loading function.
 - **Streamlit version did not support `border=True` in `st.metric()`**
    Fix: Replaced `border=True` with `st.container()` layout to keep clean visual structure.
-- **Heroku build log warning about `runtime.txt` deprecation**
-   Fix: Removed `runtime.txt` to align with current Heroku recommendations and avoid future deployment issues.
 - **Long pages with too much scrolling**
    Fix: Use expanders with the setting `expanded=False` on the Model Performance and Electricity Cost Driver Analysis pages instead of expanded sections and separators, to improve UX and prevent excessive scrolling.
 
