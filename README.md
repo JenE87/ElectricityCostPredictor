@@ -346,6 +346,6 @@ To install all the dependencies required for full local development and executio
 
 
 ## Acknowledgements (optional)
-* Thank the people who provided support through this project.
+* I would like to thank my mentor, Mo Shami, for his guidance and support throughout this project.
 
 [Back to top](#electricity-cost-predictor)
