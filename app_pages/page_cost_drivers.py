@@ -130,9 +130,9 @@ def page_cost_drivers_body():
             "Show electricity cost for sites with vs without residents"
         ):
             st.caption(
-                "This compares electricity cost between sites that have "
-                "residents and those that do not (e.g., commercial or "
-                "industrial sites)."
+                "This compares the distribution of electricity cost between "
+                "sites that have residents and those that do not (e.g., "
+                "commercial or industrial sites)."
             )
 
             df_plot = df_raw.copy()
